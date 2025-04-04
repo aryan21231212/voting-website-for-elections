@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Candidate Information</title>
+  <style>
+    :root {
+      --primary: #6a3093;
+      --primary-gradient: linear-gradient(135deg, #a044ff 0%, #6a3093 100%);
+      --secondary: #3498db;
+      --accent1: #f46b45;
+      --accent2: #26c6da;  
+      --accent3: #ff7eb3;
+      --light: #f8f9fa;
+      --dark: #303030;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #c2e9fb 0%, #a1c4fd 100%);
+      color: var(--dark);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      padding: 30px;
+      border-top: 5px solid var(--accent1);
+    }
+    
+    h1 {
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 3px solid #f0f0f0;
+      font-weight: 600;
+      font-size: 2.2rem;
+    }
+    
+    .form-group {
+      margin-bottom: 25px;
+      position: relative;
+      transition: all 0.3s;
+    }
+    
+    .form-group:hover {
+      transform: translateY(-2px);
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--primary);
+      font-size: 1.1rem;
+      position: relative;
+      padding-left: 12px;
+    }
+    
+    label::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 5px;
+      height: 18px;
+      background: linear-gradient(to bottom, var(--accent1), var(--accent2));
+      border-radius: 3px;
+    }
+    
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: all 0.3s;
+      background-color: #f9f9f9;
+    }
+    
+    input[type="text"]:focus,
+    input[type="number"]:focus {
+      border-color: var(--accent2);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(38, 198, 218, 0.2);
+      background-color: white;
+    }
+    
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 40px;
+    }
+    
+    button {
+      padding: 14px 28px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: all 0.3s;
+      border: none;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    button[type="submit"] {
+      background: linear-gradient(135deg, var(--accent2) 0%, var(--secondary) 100%);
+      color: white;
+    }
+    
+    button[type="submit"]:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 15px rgba(38, 198, 218, 0.3);
+    }
+    
+    button.cancel {
+      background: linear-gradient(135deg, #f7f7f7 0%, #e0e0e0 100%);
+      color: #666;
+    }
+    
+    button.cancel:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    
+    .header-icon {
+      background: linear-gradient(135deg, var(--accent3) 0%, var(--accent1) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-size: 32px;
+      margin-right: 15px;
+    }
+    
+    /* Colorful focus/hover effects for inputs */
+    .form-group:nth-child(1) input:focus { border-color: #FF9A8B; box-shadow: 0 0 0 3px rgba(255, 154, 139, 0.2); }
+    .form-group:nth-child(2) input:focus { border-color: #A1C4FD; box-shadow: 0 0 0 3px rgba(161, 196, 253, 0.2); }
+    .form-group:nth-child(3) input:focus { border-color: #FD6585; box-shadow: 0 0 0 3px rgba(253, 101, 133, 0.2); }
+    .form-group:nth-child(4) input:focus { border-color: #38FFDD; box-shadow: 0 0 0 3px rgba(56, 255, 221, 0.2); }
+    
+    @media (max-width: 768px) {
+      .container {
+        margin: 20px auto;
+        padding: 20px;
+      }
+      
+      button {
+        padding: 12px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header-icon">📝</div>
+      <h1>Edit Candidate Information</h1>
+    </div>
+    
+    <form action="/candidate/<%=data._id%>?_method=PUT" method="post">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" value="<%=data.name%>" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input type="number" id="age" name="age" value="<%=data.age%>" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="party">Political Party</label>
+        <input type="text" id="party" name="party" value="<%=data.party%>" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="partyDesc">Party Description</label>
+        <input type="text" id="partyDesc" name="partyDesc" value="<%=data.partyDesc%>" required>
+      </div>
+      
+      <div class="buttons">
+        <button type="button" class="cancel" onclick="history.back()">Cancel</button>
+        <button type="submit">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

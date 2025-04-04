@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Verification | Election Portal</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1a2980 0%, #26d0ce 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 450px;
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      animation: fadeIn 0.8s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .header {
+      background-color: #1a2980;
+      color: white;
+      padding: 25px 30px;
+      text-align: center;
+      position: relative;
+    }
+    
+    .header h1 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      letter-spacing: 0.5px;
+    }
+    
+    .header p {
+      font-size: 16px;
+      opacity: 0.9;
+    }
+    
+    .lock-icon {
+      width: 80px;
+      height: 80px;
+      background-color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .lock-icon::before {
+      content: "🔒";
+      font-size: 32px;
+    }
+    
+    .form-container {
+      padding: 30px;
+    }
+    
+    .form-group {
+      margin-bottom: 25px;
+    }
+    
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #333;
+      font-size: 16px;
+    }
+    
+    .form-input {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #e1e1e1;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+      background-color: #f9f9f9;
+    }
+    
+    .form-input:focus {
+      outline: none;
+      border-color: #1a2980;
+      background-color: white;
+      box-shadow: 0 0 0 3px rgba(26, 41, 128, 0.1);
+    }
+    
+    .form-input::placeholder {
+      color: #aaa;
+    }
+    
+    .submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #1a2980 0%, #26d0ce 100%);
+      color: white;
+      border: none;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      letter-spacing: 0.5px;
+    }
+    
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(26, 41, 128, 0.3);
+    }
+    
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+    
+    .footer {
+      text-align: center;
+      padding: 15px 30px;
+      border-top: 1px solid #eee;
+      color: #777;
+      font-size: 14px;
+    }
+    
+    @media (max-width: 500px) {
+      .container {
+        border-radius: 0;
+      }
+      
+      .header {
+        padding: 20px;
+      }
+      
+      .header h1 {
+        font-size: 24px;
+      }
+      
+      .form-container {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="lock-icon"></div>
+      <h1>Admin Verification</h1>
+      <p>Please enter your credentials to access the admin portal</p>
+    </div>
+    
+    <div class="form-container">
+      <form action="/verify" method="post">
+        <div class="form-group">
+          <label for="password" class="form-label">Admin Password</label>
+          <input type="password" id="password" name="password" class="form-input" placeholder="Enter admin password" required>
+        </div>
+        
+        <button type="submit" class="submit-btn">Verify & Login</button>
+      </form>
+    </div>
+    
+    <div class="footer">
+      Election Portal Administration • Secure Access
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vote for Your Favorite Candidate</title>
+  <style>
+    :root {
+      --primary: #3498db;
+      --primary-dark: #2980b9;
+      --accent: #e74c3c;
+      --light: #ecf0f1;
+      --dark: #2c3e50;
+      --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background-attachment: fixed;
+      color: var(--dark);
+      line-height: 1.6;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    h1 {
+      color: white;
+      text-align: center;
+      margin: 30px 0;
+      font-size: 2.5rem;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      font-weight: 700;
+      letter-spacing: 1px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: white;
+      border-radius: 2px;
+    }
+    
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .card-header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 20px;
+      position: relative;
+    }
+    
+    .candidate-name {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    
+    .candidate-age {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    
+    .card-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    
+    .party-name {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--dark);
+    }
+    
+    .party-desc {
+      color: #555;
+      margin-bottom: 20px;
+      line-height: 1.5;
+      flex-grow: 1;
+    }
+    
+    .vote-form {
+      margin-top: auto;
+    }
+    
+    .vote-btn {
+      width: 100%;
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .vote-btn:hover {
+      background: #c0392b;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+    }
+    
+    .badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      backdrop-filter: blur(5px);
+    }
+    
+    @media (max-width: 768px) {
+      .cards-container {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Vote for Your Favorite Candidate</h1>
+    
+    <div class="cards-container">
+      <% for(let candidate of data) { %>
+        <div class="card">
+          <div class="card-header">
+            <div class="candidate-name"><%=candidate.name%></div>
+            <div class="candidate-age"><%=candidate.age%> years old</div>
+            <div class="badge">Candidate</div>
+          </div>
+          <div class="card-body">
+            <div class="party-name"><%=candidate.party%></div>
+            <div class="party-desc"><%=candidate.partyDesc%></div>
+            <form action="/candidate/vote/<%=candidate._id%>" class="vote-form" onsubmit="showVoteAlert(event, '<%=candidate.name%>')">
+              <button class="vote-btn">Vote</button>
+            </form>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Candidate | Election Administration</title>
+  <style>
+    /* (styles remain unchanged) */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 600px;
+    }
+    
+    .form-card {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+    }
+    
+    .card-header {
+      background-color: #ff6b6b;
+      color: white;
+      padding: 25px 30px;
+      position: relative;
+    }
+    
+    .card-header h1 {
+      font-size: 26px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .card-header p {
+      opacity: 0.9;
+      font-size: 15px;
+    }
+    
+    .admin-badge {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      background-color: rgba(0, 0, 0, 0.2);
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .form-content {
+      padding: 30px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #333;
+      font-size: 15px;
+    }
+    
+    .form-input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 6px;
+      font-size: 15px;
+      transition: all 0.3s ease;
+    }
+    
+    .form-input:focus {
+      border-color: #ff6b6b;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
+    }
+    
+    .form-input::placeholder {
+      color: #aaa;
+    }
+    
+    .add-button {
+      background-color: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 14px 20px;
+      width: 100%;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .add-button:hover {
+      background-color: #ff5252;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+    }
+    
+    .add-button:active {
+      transform: translateY(0);
+    }
+    
+    .form-footer {
+      padding: 20px 30px;
+      background-color: #f9f9f9;
+      border-top: 1px solid #eee;
+      text-align: center;
+      color: #777;
+      font-size: 14px;
+    }
+    
+    .party-icon {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+    
+    .party-icon svg {
+      width: 24px;
+      height: 24px;
+      margin-right: 10px;
+      color: #ff6b6b;
+    }
+    
+    .party-icon-text {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+    }
+    
+    /* Animation */
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .form-card {
+      animation: slideIn 0.5s ease forwards;
+    }
+    .viewCandidate {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    .viewCandidate a{
+        color: white;
+        text-decoration: none;
+        font-size: 2rem;
+        border: 2px solid white;
+        padding: 10px;
+    }
+  </style>
+</head>
+<body>
+   
+  <div class="container">
+    <div class="viewCandidate">
+        <a href="http://localhost:3000/candidate">view candidate</a>
+    </div>
+    
+    <div class="form-card">
+      <div class="card-header">
+        <h1>Add Candidate</h1>
+        <p>Enter candidate details to add them to the election ballot</p>
+        <div class="admin-badge">Admin Portal</div>
+      </div>
+      
+      <div class="form-content">
+        <div class="party-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"></path>
+            <path d="M1 21h22"></path>
+            <path d="M12 7v8"></path>
+            <path d="M8 9v4"></path>
+            <path d="M16 11v4"></path>
+          </svg>
+          <span class="party-icon-text">Candidate Information</span>
+        </div>
+        
+        <form  action="/candidate" method="post">
+          <div class="form-group">
+            <label for="name" class="form-label">Candidate Name</label>
+            <input type="text" id="name" name="name" class="form-input" placeholder="Enter the candidate's full name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="age" class="form-label">Candidate Age</label>
+            <input type="number" id="age" name="age" class="form-input" placeholder="Enter the candidate's age" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="party" class="form-label">Party Name</label>
+            <input type="text" id="party" name="party" class="form-input" placeholder="Enter the political party name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="partyDesc" class="form-label">Party Description</label>
+            <input type="text" id="partyDesc" name="partyDesc" class="form-input" placeholder="Brief description of the party platform" required>
+          </div>
+          
+          <button type="submit" class="add-button">Add Candidate</button>
+        </form>
+      </div>
+      
+      <div class="form-footer">
+        All candidates must be verified before appearing on the ballot
+      </div>
+    </div>
+  </div>
+</body>
+</html>

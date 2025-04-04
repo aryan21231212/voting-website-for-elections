@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Candidates | Election Portal</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      padding: 40px 20px;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      color: white;
+    }
+    
+    .header h1 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .header p {
+      font-size: 16px;
+      opacity: 0.9;
+    }
+    
+    .candidates-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+    }
+    
+    .candidate-card {
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .candidate-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+    
+    .card-header {
+      padding: 20px;
+      background-color: #f8f9fa;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+    }
+    
+    .party-logo {
+      width: 60px;
+      height: 60px;
+      background-color: #ff6b6b;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      flex-shrink: 0;
+    }
+    
+    .party-logo span {
+      font-size: 24px;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .candidate-info h2 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 5px;
+    }
+    
+    .party-name {
+      font-size: 16px;
+      color: #666;
+    }
+    
+    .candidate-details {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    
+    .detail-row {
+      margin-bottom: 15px;
+      flex-grow: 1;
+    }
+    
+    .detail-label {
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 5px;
+    }
+    
+    .detail-value {
+      font-size: 16px;
+      color: #333;
+    }
+    
+    .party-description {
+      background-color: #f8f8f8;
+      padding: 15px;
+      border-radius: 6px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #555;
+    }
+    
+    .vote-count {
+      background-color: #e9f7ef;
+      border-left: 4px solid #2ecc71;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+    }
+    
+    .vote-label {
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+    }
+    
+    .vote-number {
+      font-size: 24px;
+      font-weight: 700;
+      color: #2ecc71;
+    }
+    
+    .card-actions {
+      padding: 15px 20px;
+      background-color: #f8f9fa;
+      border-top: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .action-btn {
+      padding: 8px 15px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+    
+    .update-btn {
+      background-color: #3498db;
+      color: white;
+    }
+    
+    .update-btn:hover {
+      background-color: #2980b9;
+    }
+    
+    .delete-btn {
+      background-color: #e74c3c;
+      color: white;
+    }
+    
+    .delete-btn:hover {
+      background-color: #c0392b;
+    }
+    
+    .age-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #3498db;
+      color: white;
+      border-radius: 20px;
+      padding: 2px 12px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    @media (max-width: 768px) {
+      .candidates-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .header h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>All Candidates</h1>
+      <p>View and manage all candidates registered for the election</p>
+    </div>
+    
+    <div class="candidates-grid">
+      <% for(let candidate of allcandidate) { %>
+        <div class="candidate-card">
+          <div class="card-header">
+            <div class="party-logo">
+              <span><%= candidate.party.charAt(0) %></span>
+            </div>
+            <div class="candidate-info">
+              <h2><%= candidate.name %></h2>
+              <div class="party-name"><%= candidate.party %></div>
+            </div>
+            <div class="age-badge"><%= candidate.age %> yrs</div>
+          </div>
+          
+          <div class="candidate-details">
+            <div class="detail-row">
+              <div class="detail-label">Party Platform</div>
+              <div class="party-description"><%= candidate.partyDesc %></div>
+            </div>
+            
+            <div class="vote-count">
+              <div class="vote-label">Total Votes</div>
+              <div class="vote-number"><%= candidate.voteCount %></div>
+            </div>
+          </div>
+          
+          <div class="card-actions">
+            <a href="http://localhost:3000/candidate/update/<%=candidate._id%>" class="action-btn update-btn">Update</a>
+            <a href="http://localhost:3000/candidate/delete/<%=candidate._id%>" class="action-btn delete-btn">Delete</a>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>
