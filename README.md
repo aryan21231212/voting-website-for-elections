@@ -1,2 +1,2 @@
-# Voting application to vote candidates 
-# password for admin dashbord is "kiranoob"
+ Voting application to vote candidates 
+ password for admin dashboard is "kiranoob"
