@@ -4,8 +4,24 @@ const User = require("./models/user.js")
 const Candidate = require("./models/Candidate.js")
 const methodOverride = require("method-override")
 const session = require("express-session");
+const MongoStore = require('connect-mongo');
 
 const app = express();
+
+
+
+const store = MongoStore.create({
+    mongoUrl:'mongodb+srv://aryannoob343443:tT5FW9v2jnNRHYVM@cluster2.4babrlz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster2',
+    crypto:{
+        secret:"supersecretkey",
+    },
+    touchAfter: 24 * 3600,
+});
+
+store.on("error",()=>{
+    console.log("ERROR in MONGO SESSION STORE",err);
+})
+
 
 
 app.use(session({
@@ -14,6 +30,8 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: false } 
 }));
+
+
 
 
 app.set("view engine", "ejs");

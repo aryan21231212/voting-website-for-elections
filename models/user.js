@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect('mongodb://127.0.0.1:27017/vote')
+mongoose.connect('mongodb+srv://aryannoob343443:tT5FW9v2jnNRHYVM@cluster2.4babrlz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster2')
   .then(() => console.log('Connected!'));
 
 const userSchema = new mongoose.Schema({
